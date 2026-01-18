@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+    body {
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        font-family: "Times New Roman", Times, serif;
+        background-color: pink;
+        transition: background-color 1s ease;
+        overflow: hidden;
+    }
+
+    .container { 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center; 
+        cursor: pointer; 
+        z-index: 5;
+        gap: 0px;
+        transition: gap 0.6s ease;
+    }
+
+    .link {
+        margin: 0;
+        color: white;
+        font-size: 28px;
+        text-shadow: 1px 1px 15px white;
+        transition: all 0.6s ease;
+    }
+
+    #valentineText {
+        color: white;
+        font-size: 45px;
+        font-weight: bold;
+        height: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition: all 0.8s ease;
+    }
+
+    .stage1 { gap: 20px; }
+    .stage1 #valentineText { height: 60px; opacity: 1; margin-top: 10px; }
+
+    #options {
+        opacity: 0;
+        visibility: hidden;
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.8s ease;
+        margin-top: 20px;
+    }
+
+    .stage2 #options { opacity: 1; visibility: visible; }
+
+    button {
+        padding: 12px 30px;
+        font-size: 20px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        font-family: "Times New Roman";
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+    }
+
+    #yesBtn { background-color: white; color: #ff69b4; font-weight: bold; }
+    #noBtn { background-color: #ffb7c5; color: white; }
+
+    /* OVERLAYS (SAD AND HAPPY) */
+    .overlay {
+        position: fixed;
+        top: 0; left: 0; width: 100%; height: 100%;
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 100;
+        text-align: center;
+    }
+
+    #sadOverlay { background-color: #add8e6; }
+    #happyOverlay { background-color: pink; }
+
+    .overlay img { max-width: 80%; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+    .overlay h2 { color: white; margin-top: 20px; font-size: 35px; }
+
+    /* Confetti Particles */
+    .particle {
+        position: absolute;
+        pointer-events: none;
+        animation: fly 3s ease-out forwards;
+        z-index: 200;
+    }
+
+    @keyframes fly {
+        0% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
+        100% { transform: translate(var(--x), var(--y)) rotate(360deg); opacity: 0; }
+    }
+</style>
+</head>
+<body>
+
+    <div id="sadOverlay" class="overlay">
+        <img src="cat.gif" alt="Crying">
+        <h2>How could you... :(</h2>
+    </div>
+
+    <div id="happyOverlay" class="overlay">
+        <img src="catcat.gif" alt="Celebrating">
+        <h2>YAY!! ❤️✨</h2>
+    </div>
+
+    <div class="container" id="mainWrapper" onclick="progressStory()">
+        <p class="link">od u annw eb ym uhhhh...</p>
+        <div id="valentineText">Valentine?</div>
+        
+        <div id="options">
+            <button id="yesBtn" onclick="celebrate(event)">Yes</button>
+            <button id="noBtn" onclick="handleNo(event)">No</button>
+        </div>
+    </div>
+
+    <script>
+        let currentStage = 0;
+        let noCount = 0;
+        const noTexts = ["Are you sure?", "Really sure?", "Think again!", "Last chance...", "PLEASE?"];
+
+        function progressStory() {
+            const wrapper = document.getElementById('mainWrapper');
+            if (currentStage === 0) {
+                wrapper.classList.add('stage1');
+                currentStage = 1;
+            } else if (currentStage === 1) {
+                wrapper.classList.add('stage2');
+                currentStage = 2;
+            }
+        }
+
+        function handleNo(event) {
+            event.stopPropagation();
+            const noBtn = document.getElementById('noBtn');
+            const yesBtn = document.getElementById('yesBtn');
+            const optionsDiv = document.getElementById('options');
+
+            if (noCount < noTexts.length) {
+                noBtn.innerText = noTexts[noCount];
+                yesBtn.style.transform = `scale(${1 + (noCount * 0.4)})`;
+                optionsDiv.style.gap = (20 + (noCount * 60)) + "px";
+                noCount++;
+            } else {
+                document.getElementById('sadOverlay').style.display = 'flex';
+            }
+        }
+
+        function celebrate(event) {
+            event.stopPropagation();
+            // Start confetti
+            for (let i = 0; i < 100; i++) { createParticle(); }
+            
+            // Wait a tiny bit then show the happy gif
+            setTimeout(() => {
+                document.getElementById('happyOverlay').style.display = 'flex';
+            }, 500);
+        }
+
+        function createParticle() {
+            const p = document.createElement('div');
+            p.classList.add('particle');
+            const colors = ['#ffffff', '#ffeb3b', '#ff4081'];
+            p.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            p.style.width = Math.random() * 10 + 'px';
+            p.style.height = p.style.width;
+            p.style.borderRadius = Math.random() > 0.5 ? '50%' : '0%';
+            p.style.left = '50vw'; p.style.top = '50vh';
+            const angle = Math.random() * Math.PI * 2;
+            const velocity = Math.random() * 700 + 200;
+            p.style.setProperty('--x', Math.cos(angle) * velocity + 'px');
+            p.style.setProperty('--y', Math.sin(angle) * velocity + 'px');
+            document.body.appendChild(p);
+            setTimeout(() => p.remove(), 3000);
+        }
+    </script>
+
+</body>
+</html>
