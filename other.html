@@ -140,7 +140,7 @@
 <body>
 
     <audio id="bgMusic" loop>
-        <source id="musicSource" src="From The Start - Laufey _ Instrument.mp4" type="audio/mpeg">
+        <source id="musicSource" src="Laufey.mp4" type="audio/mpeg">
     </audio>
 
     <div id="sadOverlay" class="overlay">
@@ -169,7 +169,7 @@
     <script>
         let currentStage = 0;
         let noCount = 0;
-        const noTexts = ["Are you sure?", "Really sure?", "Think again!", "Last chance...", "PLEASE?"];
+        const noTexts = ["Are you sure?", "Really sure?", "FR FR??", "???", "PLEASE?"];
         const music = document.getElementById('bgMusic');
 
         function progressStory() {
@@ -202,7 +202,7 @@
             } else {
                 // Show sad screen and switch music
                 document.getElementById('sadOverlay').style.display = 'flex';
-                music.src = "Araw Gabi - Regine Velasquez (Khel Pangilinan Cover with Lyrics).mp4";
+                music.src = "Regine.mp4";
                 music.play();
             }
         }
@@ -213,7 +213,7 @@
             for (let i = 0; i < 100; i++) { createParticle(); }
             
             // Switch to happy music (optional - you can keep the same song)
-            // music.src = "Giveon - Like I Want You (Lyrics).mp4"; 
+            // music.src = "Giveon.mp4"; 
             // music.play();
 
             setTimeout(() => {
@@ -239,4 +239,5 @@
     </script>
 </body>
 </html>
+
 
