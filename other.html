@@ -124,12 +124,23 @@
             100% { transform: translate(var(--x), var(--y)) rotate(360deg); opacity: 0; }
         }
 
-        /* Mobile Adjustments */
-        @media (max-width: 600px) {
-            #valentineText { font-size: 32px; }
-            .overlay h2 { font-size: 26px; }
-            #options { flex-direction: column; gap: 10px; }
-        }
+      .message {
+    color: white;
+    font-size: 18px;
+    max-width: 80%; /* Keeps the text from hitting the edges */
+    margin-top: 15px;
+    line-height: 1.5;
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.1);
+    font-style: italic;
+}
+
+/* Mobile tweak for the message */
+@media (max-width: 600px) {
+    .message {
+        font-size: 16px;
+        max-width: 90%;
+    }
+}
     </style>
 </head>
 <body>
@@ -139,10 +150,13 @@
         <h2>ok :(</h2>
     </div>
 
-    <div id="happyOverlay" class="overlay">
-        <img src="catcat.gif" alt="Happy">
-        <h2>YAY!! ❤️✨</h2>
-    </div>
+  <div id="happyOverlay" class="overlay">
+    <img src="celebrate.gif" alt="Happy">
+    <h2>YAY!! ❤️✨</h2>
+    <p class="message">
+        this still means we're friends (right..?) but I do want to make an effort because I still like you. :)
+    </p>
+</div>
 
     <div class="container" id="mainWrapper" onclick="progressStory()">
         <p class="link">od u annw eb ym uhhhh...</p>
@@ -160,6 +174,8 @@
         const noTexts = ["Are you sure?", "Really sure?", "Think again!", "Last chance...", "PLEASE?"];
 
         function progressStory() {
+            const music = document.getElementById('bgMusic');
+            music.play().catch(e => console.log("Music blocked until user interacts"));
             const wrapper = document.getElementById('mainWrapper');
             if (currentStage === 0) {
                 wrapper.classList.add('stage1');
@@ -196,6 +212,9 @@
         }
 
         function celebrate(event) {
+            const music = document.getElementById('bgMusic');
+            music.src = "happy-celebration-song.mp3"; 
+            music.play();
             event.stopPropagation();
             // Start Confetti
             for (let i = 0; i < 100; i++) { createParticle(); }
@@ -226,4 +245,8 @@
         }
     </script>
 </body>
+    <audio id="bgMusic" loop>
+    <source src="your-music-file.mp3" type="audio/mpeg">
+</audio>
 </html>
+
