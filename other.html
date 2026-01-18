@@ -145,7 +145,7 @@
 
     <div id="sadOverlay" class="overlay">
         <img src="cat.gif" alt="Sad">
-        <h2>How could you... :(</h2>
+        <h2>Okay:(</h2>
     </div>
 
     <div id="happyOverlay" class="overlay">
@@ -213,8 +213,8 @@
             for (let i = 0; i < 100; i++) { createParticle(); }
             
             // Switch to happy music (optional - you can keep the same song)
-            // music.src = "Giveon.mp4"; 
-            // music.play();
+            music.src = "Giveon.mp4"; 
+            music.play();
 
             setTimeout(() => {
                 document.getElementById('happyOverlay').style.display = 'flex';
@@ -239,5 +239,6 @@
     </script>
 </body>
 </html>
+
 
 
