@@ -1,101 +1,110 @@
-<!DOCTPYE html>
+<!DOCTYPE html>
+<html>
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	
-	<style>
-	
-body {
- 
-    background-repeat: no-repeat;              
-    background-position: center;                
-    background-size: cover;                 
-    height: 95vh;                       
-    margin: 0;  
-	
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: "Times New Roman", Times, serif;
+            font-size: 15px;
+            color: brown;
+            text-align: center;
+            text-shadow: 1px 1px 15px white;
+            overflow: hidden; 
+            
+            /* ADDING CUSTOM CURSOR */
+            cursor: url('https://cur.cursors-4u.net/symbols/sym-9/sym847.cur'), auto;
+        }
 
-	font-family: Times New Roman;
-	font-size: 15px;
-	color: brown;
-	text-align: center;  
-text-shadow:  1px 1px 15px white;
+        /* BACKGROUND LAYER */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('loopy.gif');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            filter: blur(8px); 
+            transform: scale(1.1); 
+            z-index: -1;
+        }
 
-}
+        a:hover {
+            color: pink;
+        }
 
-a:hover {
-  color: pink;
-}
+        a {
+            color: brown;
+            cursor: url('https://cur.cursors-4u.net/symbols/sym-9/sym847.cur'), pointer;
+        }
 
-a{ 
-		color: brown;
-}
+        .animated-image {
+            border-radius: 20px;
+            position: relative;
+            margin-top: 50px;
+            transform: rotate(10deg);
+            width: 160px;
+            height: 155px;
+            transition: transform 0.3s ease;
+        }
 
-.animated-image {
-	border-radius: 20px;
-  width: 100px;
-  height: auto;
-  position: relative;
-    left: 250px; 
-    top: 50px;  
-	transform: rotate(10deg);
-	width: 160;
-			transform: scale (1.1);
-	height: 155;
-}
+        .animated-image:hover {
+            animation: shake 0.3s infinite;
+        }
 
-.animated-image:hover {
-	transform: rotate(10deg);
-			animation: shake 0.3s;
-				animation-iteration-count: infinite; 
-}
+        @keyframes shake {
+            0% { transform: translate(1px, 2px) rotate(10deg); }
+            20% { transform: translate(4px, 3px) rotate(10deg); }
+            40% { transform: translate(3px, -2px) rotate(10deg); }
+            60% { transform: translate(-3px, 4px) rotate(10deg); }
+            80% { transform: translate(-2px, 3px) rotate(10deg); }
+            100% { transform: translate(1px, 1px) rotate(10deg); }
+        }
 
+        /* UPDATED GLASS BOX */
+        .box {
+            text-align: center;
+            border-radius: 25px;
+            box-shadow: 0px 10px 30px rgba(255, 182, 193, 0.4);
+            padding: 25px;
+            margin-top: 40px;
+            
+            /* Glassmorphism: Semi-transparent pink + Blur */
+            background-color: rgba(255, 192, 203, 0.6); 
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            width: 220px;
+            transition: all 0.3s ease-in-out;
+        }
 
-@keyframes shake {
-  0% { transform: translate(1px, 2px) rotate(10deg); }
-  20% { transform: translate(4px, 3px) rotate(10deg); }
-  40% { transform: translate(3px, -2px) rotate(10deg); }
-  60% { transform: translate(-3px, 4px) rotate(10deg); }
-  80% { transform: translate(-2px, 3px) rotate(10deg); }
-  100% { transform: translate(1px, 1px) rotate(10deg); }
-}
-
-.box {	
-		text-align: center;
-		border-radius: 15px;
-		box-shadow: 0px 0px 20px pink;
-		padding:5px;
-		margin: 45px;
-		background-color: pink;
-		width:200px;
-		length: 300px;
-		 opacity: 1;
-		    transition:  opacity 0.3s ease-in-out, transform 0.3s ease, width 0.2s ease;
-		  
-}
-
-.box:hover {
-	opacity: 1.0;
-    background-color: white;
-    transform: scale(1.2);      
-    width: 210px;               
-    cursor: pointer;            
-}
-	</style>
+        .box:hover {
+            background-color: rgba(255, 255, 255, 0.85);
+            transform: scale(1.1);
+            cursor: url('https://cur.cursors-4u.net/symbols/sym-9/sym847.cur'), pointer;
+        }
+    </style>
 </head>
-<center>
-<body style="background-image: url('loopy.gif'); background-size: cover;">
+<body>
 
-<img src="heart.jpg" class="animated-image" width="150" height="150">
+    <img src="heart.jpg" class="animated-image">
 
-<div class="box">
+    <div class="box">
+        <h1> Hello :> </h1>
+        <h3> whats up bro </h3>
+        <a href="other.html" style="text-decoration: none;"> press this pls. </a>
+    </div>
 
-<h1> Hello :> </h1>
-<h3> whats up bro </h3>
-
-<a href="other.html" style="text-decoration: none;"> press this pls.  </a>
-<br> 
-
-</center>
-</div>
 </body>
 </html>
